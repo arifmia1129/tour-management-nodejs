@@ -1,4 +1,4 @@
-const { saveTourService, getTourService } = require("../services/tour.service")
+const { saveTourService, getTourService, getTourByIdService, updateTourByIdService, trendingTourService, cheapestTourService } = require("../services/tour.service")
 
 module.exports.getTour = async (req, res, next) => {
     try {
@@ -59,6 +59,76 @@ module.exports.saveTour = async (req, res, next) => {
         res.status(400).json({
             status: "fail",
             message: "Couldn't save tour details",
+            error: error.message
+        })
+    }
+}
+module.exports.getTourById = async (req, res, next) => {
+
+    try {
+        const { id } = req.params;
+        const result = await getTourByIdService(id);
+        res.status(200).json({
+            status: "success",
+            message: "Successfully get tour details",
+            data: result
+        })
+    } catch (error) {
+        res.status(400).json({
+            status: "fail",
+            message: "Couldn't get tour details",
+            error: error.message
+        })
+    }
+}
+module.exports.updateTourById = async (req, res, next) => {
+
+    try {
+        const { id } = req.params;
+        const result = await updateTourByIdService(id, req.body);
+        res.status(200).json({
+            status: "success",
+            message: "Successfully update tour details",
+            data: result
+        })
+    } catch (error) {
+        res.status(400).json({
+            status: "fail",
+            message: "Couldn't update tour details",
+            error: error.message
+        })
+    }
+}
+module.exports.getTrendingTour = async (req, res, next) => {
+
+    try {
+        const result = await trendingTourService();
+        res.status(200).json({
+            status: "success",
+            message: "Successfully get trending tour details",
+            data: result
+        })
+    } catch (error) {
+        res.status(400).json({
+            status: "fail",
+            message: "Couldn't get trending tour details",
+            error: error.message
+        })
+    }
+}
+module.exports.getCheapestTour = async (req, res, next) => {
+
+    try {
+        const result = await cheapestTourService();
+        res.status(200).json({
+            status: "success",
+            message: "Successfully get cheapest tour details",
+            data: result
+        })
+    } catch (error) {
+        res.status(400).json({
+            status: "fail",
+            message: "Couldn't get cheapest tour details",
             error: error.message
         })
     }

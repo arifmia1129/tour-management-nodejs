@@ -3,12 +3,11 @@ const router = express.Router();
 const tourController = require("../controller/tour.controller.js");
 
 
-router.route("/")
-    .get(tourController.getTour)
-    .post(tourController.saveTour)
-
-
+router.route("/trending")
+    .get(tourController.getTrendingTour)
 
 router.route("/:id")
-    .get(tourController.getTourById)
+    .patch(tourController.updateTourById)
+
+
 module.exports = router;
