@@ -5,6 +5,8 @@ const tourController = require("../controller/tour.controller.js");
 
 router.route("/trending")
     .get(tourController.getTrendingTour)
+router.route("/cheapest")
+    .get(tourController.getCheapestTour)
 
 router.route("/:id")
     .patch(tourController.updateTourById)

@@ -128,7 +128,7 @@ module.exports.getCheapestTour = async (req, res, next) => {
     } catch (error) {
         res.status(400).json({
             status: "fail",
-            message: "Couldn't get cheapest tour details",
+            message: "Couldn't get trending tour details",
             error: error.message
         })
     }
